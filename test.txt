@@ -1,0 +1,198 @@
+import React, { useState, useEffect } from 'react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card } from "@/components/ui/card";
+import { Moon, Sun } from "lucide-react";
+
+const App = () => {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert('Thank you for your message! We will get back to you soon.');
+    e.target.reset();
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          entry.target.classList.remove('opacity-0', 'translate-y-10');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section > div').forEach((section) => {
+      section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+      observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className={theme}>
+      <nav className="fixed w-full z-50 glass-effect">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex justify-between items-center">
+            <a href="#" className="text-2xl font-bold gradient-text">AI Innovate</a>
+            <div className="hidden md:flex space-x-8">
+              <a href="#home" className="nav-link">Home</a>
+              <a href="#features" className="nav-link">Features</a>
+              <a href="#blog" className="nav-link">Blog</a>
+              <a href="#contact" className="nav-link">Contact</a>
+            </div>
+            <Button variant="outline" size="icon" onClick={toggleTheme}>
+              {theme === 'light' ? <Moon /> : <Sun />}
+            </Button>
+          </div>
+        </div>
+      </nav>
+
+      <section id="home" className="min-h-screen flex items-center pt-20">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+                Transform Your Business with <span className="gradient-text">AI</span>
+              </h1>
+              <p className="text-xl">
+                Leverage cutting-edge artificial intelligence to streamline operations, enhance productivity, and drive innovation.
+              </p>
+              <div className="space-x-4">
+                <Button variant="outline" className="glass-effect">Get Started</Button>
+                <Button className="bg-gradient-to-r from-blue-500 to-purple-600">Watch Demo</Button>
+              </div>
+            </div>
+            <div className="animate-float">
+              <Card className="glass-effect p-8">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995" alt="AI Visualization" className="rounded-lg" />
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-16">Our Features</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { icon: "brain", title: "Smart Analytics", desc: "Advanced AI-powered analytics to understand your data better." },
+              { icon: "robot", title: "Automation", desc: "Automate repetitive tasks and focus on what matters." },
+              { icon: "graph-up", title: "Predictive Insights", desc: "Make data-driven decisions with our predictive models." }
+            ].map((feature, index) => (
+              <Card key={index} className="glass-effect p-6 hover:scale-105 transition-transform">
+                <i className={`bi bi-${feature.icon} text-4xl gradient-text`}></i>
+                <h3 className="text-xl font-bold mt-4">{feature.title}</h3>
+                <p className="mt-2">{feature.desc}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="py-20">
+        <div className="container mx-auto px-4">
+          <Card className="glass-effect max-w-4xl mx-auto p-8">
+            <h2 className="text-4xl font-bold text-center mb-8">Get in Touch</h2>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <Input type="text" placeholder="Name" className="glass-effect" />
+                <Input type="email" placeholder="Email" className="glass-effect" />
+              </div>
+              <Input type="text" placeholder="Subject" className="glass-effect" />
+              <Textarea placeholder="Message" rows={5} className="glass-effect" />
+              <Button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-purple-600">
+                Send Message
+              </Button>
+            </form>
+          </Card>
+        </div>
+      </section>
+
+      <footer className="py-8">
+        <div className="container mx-auto px-4 text-center">
+          <p>© 2024 AI Innovate. All rights reserved.</p>
+        </div>
+      </footer>
+
+      <style jsx global>{`
+        :root {
+          --glass-bg: rgba(255, 255, 255, 0.1);
+          --glass-border: rgba(255, 255, 255, 0.2);
+        }
+        
+        body {
+          font-family: 'Space Grotesk', sans-serif;
+          transition: background-color 0.3s ease;
+        }
+        
+        .glass-effect {
+          background: var(--glass-bg);
+          backdrop-filter: blur(10px);
+          border: 1px solid var(--glass-border);
+          border-radius: 20px;
+        }
+        
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+          100% { transform: translateY(0px); }
+        }
+        
+        .dark {
+          background-color: #0f172a;
+          color: #fff;
+        }
+        
+        .light {
+          background-color: #f8fafc;
+          color: #0f172a;
+        }
+
+        .gradient-text {
+          background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+        
+        .nav-link {
+          position: relative;
+        }
+        
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: -2px;
+          left: 0;
+          background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+          transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+          width: 100%;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default App;

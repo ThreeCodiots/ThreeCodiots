@@ -14,9 +14,10 @@ import Blog from "@/components/Blog";
 import Testimonial from "@/components/Testimonial";
 
 export const metadata: Metadata = {
-  title: "Next.js Starter Template for SaaS Startups - Solid SaaS Boilerplate",
-  description: "This is Home for Solid Pro",
-  // other metadata
+   title: "ThreeCodiots - AI SaaS Platform for Businesses",
+  description: "ThreeCodiots offers an AI-powered SaaS platform designed to streamline business operations and improve efficiency. Built with Next.js and TypeScript.",
+  keywords: "AI SaaS, AI platform, business automation, Next.js, TypeScript, SaaS for businesses, business efficiency",
+  author: "ThreeCodiots Team",
 };
 
 export default function Home() {

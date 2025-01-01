@@ -17,7 +17,6 @@ export const metadata: Metadata = {
    title: "ThreeCodiots - AI SaaS Platform for Businesses",
    description: "ThreeCodiots offers an AI-powered SaaS platform designed to streamline business operations and improve efficiency. Built with Next.js and TypeScript.",
    keywords: "AI SaaS, AI platform, business automation, Next.js, TypeScript, SaaS for businesses, business efficiency",
-   author: "ThreeCodiots Team",
 };
 
 export default function Home() {

@@ -1,0 +1,194 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 3Codiots Brand Design System */
+@layer base {
+  :root {
+    --background: 0 0% 0%; /* Brand Black */
+    --foreground: 0 0% 100%; /* Brand White */
+
+    --card: 0 0% 10.2%; /* Brand Dark */
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 10.2%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 180 100% 47%; /* Brand Cyan */
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 10.2%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 10.2%;
+    --muted-foreground: 0 0% 66.7%; /* Brand Gray */
+
+    --accent: 0 0% 10.2%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 10.2%;
+    --input: 0 0% 10.2%;
+    --ring: 180 100% 47%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 180 100% 47%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 10.2%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 10.2%;
+    --sidebar-ring: 180 100% 47%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-jakarta;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-brand-black;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-cyan rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-cyan-light;
+  }
+}
+
+/* Typography Styles */
+@layer components {
+  .text-gradient {
+    @apply bg-gradient-brand bg-clip-text text-transparent;
+  }
+
+  .heading-1 {
+    @apply text-5xl md:text-7xl font-bold leading-tight tracking-tight;
+  }
+
+  .heading-2 {
+    @apply text-4xl md:text-6xl font-bold leading-tight;
+  }
+
+  .heading-3 {
+    @apply text-3xl md:text-4xl font-semibold leading-tight;
+  }
+
+  .body-large {
+    @apply text-lg md:text-xl leading-relaxed;
+  }
+
+  .body-regular {
+    @apply text-base leading-relaxed;
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply bg-gradient-brand text-brand-black font-bold py-4 px-8 rounded-lg 
+           uppercase tracking-wide transition-all duration-300 
+           hover:shadow-lg hover:shadow-brand-cyan/50 hover:scale-105
+           focus:outline-none focus:ring-2 focus:ring-brand-cyan;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-brand-cyan text-brand-cyan font-bold py-4 px-8 rounded-lg 
+           uppercase tracking-wide transition-all duration-300 
+           hover:bg-brand-cyan hover:text-brand-black hover:shadow-lg hover:shadow-brand-cyan/50
+           focus:outline-none focus:ring-2 focus:ring-brand-cyan;
+  }
+
+  /* Card Styles */
+  .card-glass {
+    @apply bg-brand-dark/80 backdrop-blur-sm border border-brand-cyan/20 rounded-xl;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:transform hover:scale-105 
+           hover:shadow-xl hover:shadow-brand-cyan/20;
+  }
+
+  /* Section Spacing */
+  .section-spacing {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+
+  /* Animations */
+  .animate-on-scroll {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+
+  .animate-on-scroll.in-view {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Glow Effects */
+  .glow-effect {
+    @apply relative;
+  }
+
+  .glow-effect::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-brand opacity-20 blur-xl rounded-lg;
+    z-index: -1;
+  }
+
+  /* Loading Animation */
+  .loading-dots::after {
+    content: '';
+    animation: loading-dots 1.5s infinite;
+  }
+
+  @keyframes loading-dots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+  }
+}
+
+/* Utility Classes */
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .gradient-mask {
+    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
